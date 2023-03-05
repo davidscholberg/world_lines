@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://po81myt3hqi3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8np2f"]
+size = Vector2(1200, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlnca"]
+size = Vector2(40, 650)
+
+[node name="LevelBase" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="OutOfBoundsTop" type="Area2D" parent="." groups=["boundaries"]]
+position = Vector2(575, -20)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBoundsTop"]
+shape = SubResource("RectangleShape2D_8np2f")
+
+[node name="OutOfBoundsBottom" type="Area2D" parent="." groups=["boundaries"]]
+position = Vector2(575, 668)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBoundsBottom"]
+shape = SubResource("RectangleShape2D_8np2f")
+
+[node name="OutOfBoundsLeft" type="Area2D" parent="." groups=["boundaries"]]
+position = Vector2(-20, 324)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBoundsLeft"]
+shape = SubResource("RectangleShape2D_jlnca")
+
+[node name="OutOfBoundsRight" type="Area2D" parent="." groups=["boundaries"]]
+position = Vector2(1172, 324)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutOfBoundsRight"]
+shape = SubResource("RectangleShape2D_jlnca")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cehbrulhlagkq"]
+
+[ext_resource type="Texture2D" uid="uid://5ay6f603v0sp" path="res://assets/circle.png" id="1_hbary"]
+[ext_resource type="Script" path="res://scenes/objects/circle_sprite.gd" id="2_lyxgc"]
+
+[node name="CircleSprite" type="Sprite2D"]
+scale = Vector2(0.0976562, 0.0976562)
+texture = ExtResource("1_hbary")
+script = ExtResource("2_lyxgc")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://2qhvucs3fncu"]
+
+[ext_resource type="Script" path="res://scenes/objects/player.gd" id="1_p1c6w"]
+[ext_resource type="PackedScene" uid="uid://cehbrulhlagkq" path="res://scenes/objects/circle_sprite.tscn" id="2_ojk0j"]
+[ext_resource type="Texture2D" uid="uid://blatu1jhtjuq8" path="res://assets/arrow.png" id="3_x0gow"]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_p1c6w")
+metadata/_edit_group_ = true
+
+[node name="CircleSprite" parent="." instance=ExtResource("2_ojk0j")]
+scale = Vector2(0.0390625, 0.0390625)
+
+[node name="ArrowSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.2, -50)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_x0gow")

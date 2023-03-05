@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckwktscm5rkdw"]
+
+[ext_resource type="PackedScene" uid="uid://d2ckeedkd4aoi" path="res://scenes/objects/attractor.tscn" id="1_fcjxs"]
+[ext_resource type="PackedScene" uid="uid://2qhvucs3fncu" path="res://scenes/objects/player.tscn" id="2_rm1dl"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Attractor1" parent="." instance=ExtResource("1_fcjxs")]
+position = Vector2(675, 343)
+radius = 50.0
+
+[node name="Attractor2" parent="." instance=ExtResource("1_fcjxs")]
+position = Vector2(871, 419)
+radius = 70.0
+
+[node name="Attractor3" parent="." instance=ExtResource("1_fcjxs")]
+position = Vector2(505, 385)
+
+[node name="Player" parent="." instance=ExtResource("2_rm1dl")]
+position = Vector2(1078, 584)
