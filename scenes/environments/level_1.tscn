@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://duf4mba13uc3m"]
+[gd_scene load_steps=5 format=3 uid="uid://dd50qpya28i6v"]
 
-[ext_resource type="PackedScene" uid="uid://po81myt3hqi3" path="res://scenes/objects/level_base.tscn" id="1_b388l"]
+[ext_resource type="PackedScene" uid="uid://po81myt3hqi3" path="res://scenes/utility/level_base.tscn" id="1_b388l"]
 [ext_resource type="PackedScene" uid="uid://2qhvucs3fncu" path="res://scenes/objects/player.tscn" id="2_k5uuv"]
 [ext_resource type="PackedScene" uid="uid://d2ckeedkd4aoi" path="res://scenes/objects/attractor.tscn" id="3_kihw2"]
 [ext_resource type="PackedScene" uid="uid://dhyqt8du615fh" path="res://scenes/objects/destination.tscn" id="4_jwwwn"]
