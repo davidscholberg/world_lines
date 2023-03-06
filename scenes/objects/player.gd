@@ -92,6 +92,7 @@ func _ready():
 	_setup_destination_collision_check()
 	initial_position = position
 	_setup_player()
+	add_to_group("player")
 
 func _input(event):
 	if Engine.is_editor_hint():
