@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://8mp3tumibbno"]
+
+[ext_resource type="PackedScene" uid="uid://po81myt3hqi3" path="res://scenes/objects/level_base.tscn" id="1_7obpf"]
+[ext_resource type="PackedScene" uid="uid://d2ckeedkd4aoi" path="res://scenes/objects/attractor.tscn" id="2_faclo"]
+[ext_resource type="PackedScene" uid="uid://dhyqt8du615fh" path="res://scenes/objects/destination.tscn" id="3_t6ta7"]
+[ext_resource type="PackedScene" uid="uid://2qhvucs3fncu" path="res://scenes/objects/player.tscn" id="4_3x5ve"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="LevelBase" parent="." instance=ExtResource("1_7obpf")]
+
+[node name="Attractor1" parent="." instance=ExtResource("2_faclo")]
+position = Vector2(543, 136)
+radius = 50.0
+
+[node name="Attractor2" parent="." instance=ExtResource("2_faclo")]
+position = Vector2(789, 452)
+radius = 100.0
+
+[node name="Destination" parent="." instance=ExtResource("3_t6ta7")]
+position = Vector2(127, 137)
+
+[node name="Player" parent="." instance=ExtResource("4_3x5ve")]
+position = Vector2(1040, 545)
