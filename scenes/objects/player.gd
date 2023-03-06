@@ -1,6 +1,8 @@
 @tool
 extends CharacterBody2D
 
+signal player_completed_level
+
 const arrow_max_distance: float = 200.0
 const arrow_min_distance: float = 100.0
 const arrow_scale_factor: float = 0.05
@@ -22,6 +24,10 @@ var initial_velocity_factor: float
 var in_motion: bool = false
 var initial_position: Vector2
 var destination_reached: bool = false
+var distance_to_destination_center: float
+var direction_to_destination_center: Vector2
+var initial_destination_reached_position: Vector2
+var completed_level: bool = false
 
 func _set_sprite_radius() -> void:
 	$CircleSprite.radius = radius
@@ -63,6 +69,11 @@ func _setup_destination_collision_check() -> void:
 
 func _destination_reached(_body: Node2D) -> void:
 	destination_reached = true
+	initial_destination_reached_position = global_position
+	for destination in get_tree().get_nodes_in_group("destination"):
+		distance_to_destination_center = global_position.distance_to(destination.global_position)
+		direction_to_destination_center = global_position.direction_to(destination.global_position)
+		break
 
 func _setup_player() -> void:
 	position = initial_position
@@ -106,7 +117,14 @@ func _input(event):
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
-	if not in_motion or destination_reached:
+	if not in_motion or completed_level:
+		return
+	if destination_reached:
+		if initial_destination_reached_position.distance_to(global_position) > distance_to_destination_center:
+			completed_level = true
+			emit_signal("player_completed_level")
+			return
+		global_position += direction_to_destination_center * distance_to_destination_center * delta
 		return
 	if get_slide_collision_count() > 0:
 		_setup_player()
