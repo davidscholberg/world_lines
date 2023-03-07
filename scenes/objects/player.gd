@@ -79,9 +79,19 @@ func _setup_player() -> void:
 	position = initial_position
 	global_rotation = 0
 	in_motion = false
-	$ArrowSprite.scale = Vector2(arrow_scale_factor, arrow_scale_factor)
-	$ArrowSprite.position = Vector2($ArrowSprite.position.x, arrow_y_offset)
+	_handle_mouse_position_player_changes(get_viewport().get_mouse_position())
 	$ArrowSprite.visible = true
+
+func _handle_mouse_position_player_changes(mouse_position: Vector2) -> void:
+	var power_ratio: float = _calculate_power_ratio(global_position, mouse_position)
+	var scale_ratio: float = _calculate_arrow_scale_ratio(power_ratio)
+	var scale_y: float = scale_ratio * arrow_scale_factor
+	$ArrowSprite.scale = Vector2($ArrowSprite.scale.x, scale_y)
+	var scale_y_offset: float = _calculate_arrow_scale_y_offset(scale_y)
+	$ArrowSprite.position = Vector2($ArrowSprite.position.x, arrow_y_offset + scale_y_offset)
+	var angle_to_cursor: float = global_position.angle_to_point(mouse_position)
+	global_rotation = angle_to_cursor + (PI / 2)
+	initial_velocity_factor = _calculate_initial_velocity_factor(power_ratio)
 
 func _ready():
 	_set_sprite_radius()
@@ -105,15 +115,7 @@ func _input(event):
 		$ArrowSprite.visible = false
 		in_motion = true
 	if event is InputEventMouseMotion:
-		var power_ratio: float = _calculate_power_ratio(global_position, event.global_position)
-		var scale_ratio: float = _calculate_arrow_scale_ratio(power_ratio)
-		var scale_y: float = scale_ratio * arrow_scale_factor
-		$ArrowSprite.scale = Vector2($ArrowSprite.scale.x, scale_y)
-		var scale_y_offset: float = _calculate_arrow_scale_y_offset(scale_y)
-		$ArrowSprite.position = Vector2($ArrowSprite.position.x, arrow_y_offset + scale_y_offset)
-		var angle_to_cursor: float = global_position.angle_to_point(event.global_position)
-		global_rotation = angle_to_cursor + (PI / 2)
-		initial_velocity_factor = _calculate_initial_velocity_factor(power_ratio)
+		_handle_mouse_position_player_changes(event.global_position)
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
