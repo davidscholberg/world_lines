@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bto567i2oe2pa"]
+
+[ext_resource type="PackedScene" uid="uid://po81myt3hqi3" path="res://scenes/utility/level_base.tscn" id="1_7nyr2"]
+[ext_resource type="PackedScene" uid="uid://dhyqt8du615fh" path="res://scenes/objects/destination.tscn" id="2_ij05j"]
+[ext_resource type="PackedScene" uid="uid://2qhvucs3fncu" path="res://scenes/objects/player.tscn" id="3_5p1v2"]
+[ext_resource type="PackedScene" uid="uid://d2ckeedkd4aoi" path="res://scenes/objects/attractor.tscn" id="4_fny6j"]
+
+[node name="Level4" type="Node2D"]
+
+[node name="LevelBase" parent="." instance=ExtResource("1_7nyr2")]
+
+[node name="Destination" parent="." instance=ExtResource("2_ij05j")]
+position = Vector2(340, 134)
+
+[node name="Attractor4" parent="." instance=ExtResource("4_fny6j")]
+position = Vector2(585, 37)
+
+[node name="Attractor5" parent="." instance=ExtResource("4_fny6j")]
+position = Vector2(551, 476)
+radius = 80.0
+
+[node name="Attractor6" parent="." instance=ExtResource("4_fny6j")]
+position = Vector2(459, 280)
+radius = 100.0
+
+[node name="Attractor7" parent="." instance=ExtResource("4_fny6j")]
+position = Vector2(539, 119)
+radius = 50.0
+
+[node name="Player" parent="." instance=ExtResource("3_5p1v2")]
+position = Vector2(1105, 263)
