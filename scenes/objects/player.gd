@@ -93,6 +93,16 @@ func _handle_mouse_position_player_changes(mouse_position: Vector2) -> void:
 	global_rotation = angle_to_cursor + (PI / 2)
 	initial_velocity_factor = _calculate_initial_velocity_factor(power_ratio)
 
+# NOTE: We have to scale the mouse position based on the window stretch factor
+# when the mouse position is given by the event object.
+func _scale_mouse_position(mouse_position: Vector2) -> Vector2:
+	var screen_transform: Transform2D = get_viewport().get_screen_transform()
+	var window_offset: Vector2 = screen_transform.get_origin()
+	mouse_position -= window_offset
+	var window_scale: Vector2 = screen_transform.get_scale()
+	mouse_position = Vector2(mouse_position.x / window_scale.x, mouse_position.y / window_scale.y)
+	return mouse_position
+
 func _ready():
 	_set_sprite_radius()
 	if Engine.is_editor_hint():
@@ -110,12 +120,14 @@ func _input(event):
 	if in_motion or destination_reached:
 		return
 	if event is InputEventMouseButton:
-		var direction: Vector2 = global_position.direction_to(event.global_position)
+		var scaled_mouse_position: Vector2 = _scale_mouse_position(event.global_position)
+		var direction: Vector2 = global_position.direction_to(scaled_mouse_position)
 		velocity = direction * initial_velocity_factor
 		$ArrowSprite.visible = false
 		in_motion = true
 	if event is InputEventMouseMotion:
-		_handle_mouse_position_player_changes(event.global_position)
+		var scaled_mouse_position: Vector2 = _scale_mouse_position(event.global_position)
+		_handle_mouse_position_player_changes(scaled_mouse_position)
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
