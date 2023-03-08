@@ -12,13 +12,7 @@ const arrow_y_offset: float = -50
 const initial_velocity_min: float = 100.0
 const initial_velocity_max: float = 300.0
 
-@export var radius: float = 20.0:
-	get:
-		return radius
-	set(new_radius):
-		radius = new_radius
-		_set_sprite_radius()
-
+var radius: float = 20.0
 var gravity_factor: float = 1000.0
 var initial_velocity_factor: float
 var in_motion: bool = false
@@ -28,9 +22,6 @@ var distance_to_destination_center: float
 var direction_to_destination_center: Vector2
 var initial_destination_reached_position: Vector2
 var completed_level: bool = false
-
-func _set_sprite_radius() -> void:
-	$CircleSprite.radius = radius
 
 func _setup_collision_shape() -> void:
 	var circle_shape: CircleShape2D = CircleShape2D.new()
@@ -104,7 +95,6 @@ func _scale_mouse_position(mouse_position: Vector2) -> Vector2:
 	return mouse_position
 
 func _ready():
-	_set_sprite_radius()
 	if Engine.is_editor_hint():
 		return
 	_setup_collision_shape()
@@ -148,3 +138,6 @@ func _physics_process(delta):
 		var distance_squared: float = global_position.distance_squared_to(attractor.global_position)
 		velocity += direction * ((attractor.radius ** 2) / distance_squared) * gravity_factor * delta
 	move_and_slide()
+
+func _draw():
+	draw_circle(Vector2(), radius, Color.SLATE_GRAY)
