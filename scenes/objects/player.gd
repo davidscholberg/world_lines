@@ -22,6 +22,7 @@ var distance_to_destination_center: float
 var direction_to_destination_center: Vector2
 var initial_destination_reached_position: Vector2
 var completed_level: bool = false
+var exploding: bool = false
 
 func _setup_collision_shape() -> void:
 	var circle_shape: CircleShape2D = CircleShape2D.new()
@@ -71,6 +72,7 @@ func _setup_player() -> void:
 	global_rotation = 0
 	in_motion = false
 	_handle_mouse_position_player_changes(get_viewport().get_mouse_position())
+	$PlayerTexture.visible = true
 	$ArrowSprite.visible = true
 
 func _handle_mouse_position_player_changes(mouse_position: Vector2) -> void:
@@ -94,6 +96,17 @@ func _scale_mouse_position(mouse_position: Vector2) -> Vector2:
 	mouse_position = Vector2(mouse_position.x / window_scale.x, mouse_position.y / window_scale.y)
 	return mouse_position
 
+func _make_explosion() -> void:
+	exploding = true
+	$PlayerTexture.visible = false
+	$GPUParticles2D.restart()
+	await get_tree().create_timer(1.0).timeout
+	exploding = false
+	_setup_player()
+	# NOTE: the following is required to reset the slide collision count
+	velocity = Vector2()
+	move_and_slide()
+
 func _ready():
 	if Engine.is_editor_hint():
 		return
@@ -107,7 +120,7 @@ func _ready():
 func _input(event):
 	if Engine.is_editor_hint():
 		return
-	if in_motion or destination_reached:
+	if in_motion or exploding or destination_reached:
 		return
 	if event is InputEventMouseButton:
 		var scaled_mouse_position: Vector2 = _scale_mouse_position(event.global_position)
@@ -122,7 +135,7 @@ func _input(event):
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
-	if not in_motion or completed_level:
+	if not in_motion or exploding or completed_level:
 		return
 	if destination_reached:
 		if initial_destination_reached_position.distance_to(global_position) > distance_to_destination_center:
@@ -132,12 +145,10 @@ func _physics_process(delta):
 		global_position += direction_to_destination_center * distance_to_destination_center * delta
 		return
 	if get_slide_collision_count() > 0:
-		_setup_player()
+		_make_explosion()
+		return
 	for attractor in get_tree().get_nodes_in_group("attractors"):
 		var direction: Vector2 = global_position.direction_to(attractor.global_position)
 		var distance_squared: float = global_position.distance_squared_to(attractor.global_position)
 		velocity += direction * ((attractor.radius ** 2) / distance_squared) * gravity_factor * delta
 	move_and_slide()
-
-func _draw():
-	draw_circle(Vector2(), radius, Color.SLATE_GRAY)
