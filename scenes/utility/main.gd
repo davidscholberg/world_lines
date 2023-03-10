@@ -6,6 +6,7 @@ var level_path_list: Array = [
 	"res://scenes/environments/level_2.tscn",
 	"res://scenes/environments/level_3.tscn",
 	"res://scenes/environments/level_4.tscn",
+	"res://scenes/environments/level_5.tscn",
 ]
 var level_path_index: int = -1
 var level_transition: bool = true

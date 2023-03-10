@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0ibaltogf45q"]
+
+[ext_resource type="PackedScene" uid="uid://po81myt3hqi3" path="res://scenes/utility/level_base.tscn" id="1_xc6wq"]
+[ext_resource type="PackedScene" uid="uid://dhyqt8du615fh" path="res://scenes/objects/destination.tscn" id="2_5w5bm"]
+[ext_resource type="PackedScene" uid="uid://2qhvucs3fncu" path="res://scenes/objects/player.tscn" id="3_qf1qr"]
+[ext_resource type="PackedScene" uid="uid://d2ckeedkd4aoi" path="res://scenes/objects/attractor.tscn" id="4_egh61"]
+
+[node name="Level5" type="Node2D"]
+
+[node name="LevelBase" parent="." instance=ExtResource("1_xc6wq")]
+
+[node name="Attractor" parent="." instance=ExtResource("4_egh61")]
+position = Vector2(772, 335)
+radius = 100.0
+
+[node name="Attractor2" parent="." instance=ExtResource("4_egh61")]
+position = Vector2(400, 330)
+radius = 100.0
+
+[node name="Attractor3" parent="." instance=ExtResource("4_egh61")]
+position = Vector2(586, 99)
+
+[node name="Attractor4" parent="." instance=ExtResource("4_egh61")]
+position = Vector2(591, 534)
+
+[node name="Destination" parent="." instance=ExtResource("2_5w5bm")]
+position = Vector2(161, 321)
+
+[node name="Player" parent="." instance=ExtResource("3_qf1qr")]
+position = Vector2(969, 344)
