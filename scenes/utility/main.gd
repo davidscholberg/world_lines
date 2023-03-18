@@ -20,6 +20,8 @@ func _transition_to_next_level() -> void:
 	if level_path_index > level_path_list.size() - 1:
 		game_ended = true
 	else:
+		$FullScreenControl/LevelCountLabel.visible = true
+		$FullScreenControl/LevelCountLabel.text = "Level %d" % (level_path_index + 1)
 		var level_scene: Resource = load(level_path_list[level_path_index])
 		current_level = level_scene.instantiate()
 		add_child(current_level)
@@ -33,7 +35,8 @@ func _level_completed() -> void:
 
 func _process(_delta):
 	if game_ended:
-		$EndControl.visible = true
+		$FullScreenControl/LevelCountLabel.visible = false
+		$FullScreenControl/EndLabel.visible = true
 		return
 	if level_transition:
 		_transition_to_next_level()

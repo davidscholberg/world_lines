@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cicse2035gp4u"]
+[gd_scene load_steps=4 format=3 uid="uid://cicse2035gp4u"]
 
 [ext_resource type="Script" path="res://scenes/utility/main.gd" id="1_b4o06"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3llst"]
+font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_qjola"]
 font_size = 64
@@ -8,14 +11,23 @@ font_size = 64
 [node name="Main" type="Node2D"]
 script = ExtResource("1_b4o06")
 
-[node name="EndControl" type="Control" parent="."]
-visible = false
+[node name="FullScreenControl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="EndLabel" type="Label" parent="EndControl"]
+[node name="LevelCountLabel" type="Label" parent="FullScreenControl"]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 50.0
+label_settings = SubResource("LabelSettings_3llst")
+
+[node name="EndLabel" type="Label" parent="FullScreenControl"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
